@@ -31,6 +31,9 @@ class Watcher {
      * 将 index.html 中原来的注册逻辑移到这里，借助 this 来实现。
      */
     registerSelf() {
+        currentWatcher = this
+        const value = this.observableTarget[this.key]
+        currentWatcher = null
     }
 
 }

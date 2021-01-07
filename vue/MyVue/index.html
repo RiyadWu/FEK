@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>小叶真棒！！</title>
+    <script src="./global.js"></script>
     <script src="./Observer.js"></script>
     <script src="./Watcher.js"></script>
     <script src="./Depth.js"></script>
@@ -10,8 +11,6 @@
 
 <body>
     <script>
-        // 全局变量， 当前的 watcher
-        let currentWatcher = null
         // 全局变量，不用管
         const str = '%E5%A5%BD%E5%A5%BD%E5%86%99%E4%BD%9C%E4%B8%9A'
 
@@ -31,13 +30,6 @@
             }
             
         })
-
-        // 3. 通过强制触发 getter 函数来注册 watcher
-        currentWatcher = watcher
-
-        console.log(girl.name)
-
-        currentWatcher = null
 
         // 4. 触发一次 setter 函数
         girl.name = '小叶小叶'
