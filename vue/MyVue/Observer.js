@@ -8,13 +8,14 @@
  * @param {*} val 
  */
 function defineReactive(data, key, val) {
-    let watcher
+    //let watcher
+    let dep = new Depth()
     Object.defineProperty(data, key, {
         enumerable: true,
         configurable: true,
         get: function() {
-            if (currentWatcher) {
-                watcher = currentWatcher
+            if(currentWatcher){
+                dep.addSubs(currentWatcher)
             }
             return val
         },
@@ -23,7 +24,7 @@ function defineReactive(data, key, val) {
                 return
             }
             val = newVal
-            watcher.update()
+            dep.notify()
         }
     });
 }

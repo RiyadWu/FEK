@@ -5,6 +5,7 @@
     <title>Document</title>
     <script src="./Observer.js"></script>
     <script src="./Watcher.js"></script>
+    <script src="./Depth.js"></script>
 </head>
 
 <body>
@@ -15,14 +16,15 @@
         const str = '%E5%A5%BD%E5%A5%BD%E5%86%99%E4%BD%9C%E4%B8%9A'
 
         const girl = {
-            name: 'somebody'
+            name: 'somebody',
+            age: '18',
         }
 
         // 1. 创建一个 observerable 对象
         observe(girl)
 
         // 2. 创建一个 watcher
-        const watcher = new Watcher(girl, 'name', val => {
+        const watcher1 = new Watcher(girl, 'name', val => {
             if (val === '小叶小叶') {                
                 console.log(decodeURIComponent(str))
             } else {
@@ -31,15 +33,29 @@
             
         })
 
-        currentWatcher = watcher
+        const watcher2 = new Watcher(girl, 'age', val => {
+            if (val === '5') {                
+                console.log(decodeURIComponent(str))
+            } else {
+                console.log(`log in callback: ${val}`)
+            }
+            
+        })
+
+        currentWatcher = watcher1
 
         // 3. 强制触发一次 getter 函数
         console.log(girl.name)
 
+        currentWatcher = watcher2
+
+        console.log(girl.age)
+        
         currentWatcher = null
 
         // 4. 触发一次 setter 函数
-        girl.name = '小叶小叶rrr'
+        girl.name = '小叶小叶'
+        girl.age = '5'
     </script>
 
     <h1>
